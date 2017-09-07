@@ -1,4 +1,4 @@
-# vue-clip
+# [vue-clip](http://vue-clip.hendricksweb.com)
 
 > A CSS clip-path generator built with VueJS - Inspired by [Clippy](https://github.com/bennettfeely/Clippy)
 
