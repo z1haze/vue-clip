@@ -1,0 +1,28 @@
+@keyframes selected {
+  10% {
+    opacity: .5;
+  }
+}
+
+@keyframes load {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes glow {
+  50% {
+    opacity: .75;
+  }
+}
+
+@keyframes emph {
+  20% {
+    transform: none;
+    opacity: .5;
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}

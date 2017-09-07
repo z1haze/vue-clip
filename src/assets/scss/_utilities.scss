@@ -1,0 +1,14 @@
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+$colors : tomato, mediumseagreen, orange, dodgerblue, orchid, lightgray, darkturquoise, palevioletred, khaki, limegreen, coral, slateblue, indianred, gray, plum, olivedrab, lightgreen, lightsalmon, gold, peru, royalblue, sandybrown, lightseagreen, blueviolet, tomato, goldenrod, limegreen;
+
+.handle, .point, .shapes li {
+  @for $i from 1 through 27 {
+    &:nth-of-type(#{$i}) {
+      color: nth($colors, $i);
+    }
+  }
+}

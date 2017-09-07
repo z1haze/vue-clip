@@ -1,0 +1,74 @@
+input[type=number], input[type=url], label {
+  font: inherit;
+  position: relative;
+  text-align: center;
+  background: #fff;
+  flex: 1;
+  min-width: 2rem;
+  padding: .5rem .25rem;
+  border-radius: 2rem;
+  box-shadow: inset 0 0.125rem #d3d0c9, inset -0.125rem 0 #d3d0c9, inset 0 -0.125rem #d3d0c9;
+  cursor: pointer;
+  transition: background .25s;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+input[type=number] {
+  font-family: inherit;
+  font-size: 1.1rem;
+  border-radius: 2rem;
+  box-shadow: inset 0 0 0 0.125rem #d3d0c9;
+  -webkit-appearance: textfield;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+input[type=url] {
+  display: block;
+  line-height: 40px;
+  height: 40px;
+  box-shadow: inset 0 0.125rem #d3d0c9, inset 0.125rem 0 #d3d0c9, inset -0.125rem 0 #d3d0c9, inset 0 -0.125rem #d3d0c9;
+}
+
+input[type=checkbox], input[type=radio] {
+  display: none;
+}
+
+input[type=number]:first-of-type,
+input[type=url]:first-of-type,
+label:first-of-type {
+  box-shadow: inset 0 0.125rem #d3d0c9, inset 0.125rem 0 #d3d0c9, inset -0.125rem 0 #d3d0c9, inset 0 -0.125rem #d3d0c9;
+}
+
+input[type=number].joined:first-of-type,
+input[type=url].joined:first-of-type,
+label.joined:first-of-type {
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+}
+
+input[type=number].joined:last-of-type,
+input[type=url].joined:last-of-type,
+label.joined:last-of-type {
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+
+label:hover, input[type="number"]:hover,
+input[type="url"]:hover {
+  background: #d3d0c9;
+}
+
+input:checked + label, label[type="number"]:focus, label[type="url"]:focus, input:checked + input[type="number"], input[type="number"][type="number"]:focus, input[type="number"][type="url"]:focus, input:checked + input[type="url"], input[type="url"][type="number"]:focus, input[type="url"][type="url"]:focus {
+  background: #100a09;
+  z-index: 100;
+  color: #d3d0c9;
+  outline: 0;
+  box-shadow: inset 0 0 0 0.125rem #100a09, 0 0 0 0.125rem #100a09;
+}

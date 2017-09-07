@@ -1,0 +1,66 @@
+.panel {
+  flex: auto;
+  padding: 1rem 1rem 1rem .5rem;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(16,10,9,.15);
+  margin: .5rem .25rem;
+
+  &.dark {
+    background: #100a09;
+    padding: .75rem;
+    color: #fff;
+    align-items: center;
+
+    h2:first-child {
+      color: #d3d0c9;
+    }
+
+    input {
+      padding: .5rem;
+      border-radius: 5rem;
+      flex: 1;
+      font-family: monospace;
+      text-align: center;
+      cursor: text;
+      color: #d3d0c9!important;
+      background: #000;
+      box-shadow: inset 0 0 0 0.125rem rgba(211,208,201,.5)!important;
+      animation: glow 1.5s ease-in-out infinite;
+      opacity: .5;
+
+      &:hover {
+        background: 0 0;
+        color: #d3d0c9!important;
+        animation: none;
+        opacity: .75;
+      }
+
+      &:focus {
+        color: #d3d0c9!important;
+        box-shadow: inset 0 0 0 0.125rem rgba(211,208,201,.5)!important;
+        animation: none;
+        opacity: 1;
+      }
+    }
+
+    p {
+      color: #d3d0c9;
+      margin: .5rem 0;
+    }
+
+    button {
+      font: inherit;
+      padding: .5rem;
+      border-radius: 5rem;
+      cursor: pointer;
+      flex: 1;
+      background: rgba(255,255,255,.35);
+      color: rgba(255,255,255,.9);
+    }
+  }
+
+  &:first-of-type {
+    margin-top: .25rem;
+  }
+}
