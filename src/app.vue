@@ -211,6 +211,7 @@
       },
 
       addHandle (e) {
+        console.log(e)
         let x = Math.round(((e.offsetX - 10) / this.options.width) * 100)
         let y = Math.round(((e.offsetY - 10) / this.options.height) * 100)
 

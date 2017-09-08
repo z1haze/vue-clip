@@ -224,4 +224,8 @@
             opacity: 1;
         }
     }
+
+    .playground.customizing .handle {
+        pointer-events: none;
+    }
 </style>

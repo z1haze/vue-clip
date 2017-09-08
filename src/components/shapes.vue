@@ -44,18 +44,6 @@
             display: block;
             overflow-x: scroll;
 
-            &:after {
-                display: block;
-                position: absolute;
-                content: "";
-                pointer-events: none;
-                bottom: 0;
-                right: 0;
-                top: 0;
-                background: linear-gradient(90deg, rgba(211, 208, 201, 0), #d3d0c9);
-                width: 1.5rem;
-            }
-
             @media (min-width: 800px) {
                 display: none;
             }

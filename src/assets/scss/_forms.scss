@@ -10,9 +10,6 @@ input[type=number], input[type=url], label {
   box-shadow: inset 0 0.125rem #d3d0c9, inset -0.125rem 0 #d3d0c9, inset 0 -0.125rem #d3d0c9;
   cursor: pointer;
   transition: background .25s;
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
 }
 
 input[type=number] {
@@ -20,12 +17,13 @@ input[type=number] {
   font-size: 1.1rem;
   border-radius: 2rem;
   box-shadow: inset 0 0 0 0.125rem #d3d0c9;
-  -webkit-appearance: textfield;
 
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  @media(min-width: 800px) {
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 }
 
