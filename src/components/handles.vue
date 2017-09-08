@@ -56,7 +56,6 @@
       },
 
       'options.height' () {
-        console.log('changed height')
         this.resetHandles()
       }
     },
