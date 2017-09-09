@@ -1,7 +1,7 @@
 <template>
     <li>
         <figure class="gallery-cell">
-            <div class="shape" :style="[{ 'clip-path': clipCSS(shape) }, { '-webkit-clip-path': clipCSS(shape) }]"></div>
+            <div class="shape" :style="[{ 'clip-path': clipCSS({ shape, coords: shape.coords, position: shape.position, radius: shape.radius }) }, { '-webkit-clip-path': clipCSS({ shape, coords: shape.coords, position: shape.position, radius: shape.radius }) }]"></div>
             <figcaption>{{ shape.name }}</figcaption>
         </figure>
     </li>

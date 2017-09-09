@@ -106,6 +106,7 @@
           grid: [0, 0]
         }).on('pointerDown', function () {
           document.querySelectorAll('[data-point="' + i + '"]')[0].classList.add('changing')
+          self.$emit('setStartRadius')
         }).on('dragMove', function () {
           let x = this.position.x
           let y = this.position.y

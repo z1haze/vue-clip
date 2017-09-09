@@ -9,9 +9,10 @@
                      :style="background"
                 ></div>
                 <div class="clipboard"
-                     :style="[{'clip-path': clipCSS({ coords: coords })}, {'-webkit-clip-path': clipCSS({ coords: coords })}, background]"></div>
+                     :style="[{'clip-path': clipCSS({ shape, coords: shape.coords, position, radius })}, {'-webkit-clip-path': clipCSS({ shape, coords: shape.coords, position, radius })}, background]"></div>
                 <handles @updateHandle="updateHandle"
                          @removeHandle="removeHandle"
+                         @setStartRadius="setStartRadius"
                          :shape="shape"
                          :coords="coords"
                          :options="options"></handles>
@@ -31,7 +32,7 @@
   import handles from './handles.vue'
 
   export default {
-    props: ['shape', 'coords', 'options', 'customizing'],
+    props: ['shape', 'coords', 'options', 'customizing', 'position', 'radius'],
 
     components: {
       'handles': handles
@@ -59,6 +60,10 @@
 
       removeHandle (i) {
         this.$emit('removeHandle', i)
+      },
+
+      setStartRadius () {
+        this.$emit('setStartRadius')
       }
     }
   }

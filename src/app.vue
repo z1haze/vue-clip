@@ -8,9 +8,12 @@
             <playground @addHandle="addHandle"
                         @updateHandle="updateHandle"
                         @removeHandle="removeHandle"
+                        @setStartRadius="setStartRadius"
                         :coords="coords"
                         :options="options"
                         :shape="shapes[selectedIndex]"
+                        :position="position"
+                        :radius="radius"
                         :customizing="customizing"
             ></playground>
 
@@ -20,7 +23,11 @@
                     @changeShape="changeShape">
             </shapes>
 
-            <clip-path :shape="shapes[selectedIndex]" :coords="coords"></clip-path>
+            <clip-path :shape="shapes[selectedIndex]"
+                       :coords="coords"
+                       :radius="radius"
+                       :position="position"
+            ></clip-path>
 
         </main>
         <aside>
@@ -39,6 +46,7 @@
 </template>
 
 <script type="text/babel">
+  import Shapes from './shapes'
   import shapes from './components/shapes.vue'
   import playground from './components/playground.vue'
   import options from './components/options.vue'
@@ -61,7 +69,7 @@
           width: 280,
           height: 280,
           customBackground: '',
-          selectedBackground: '',
+          selectedBackground: 'static/img/pittsburgh.jpg',
           shadowBoard: false,
           imgs: [
             'static/img/pittsburgh.jpg',
@@ -72,105 +80,12 @@
         },
         selectedIndex: 0,
         customizing: false,
-        coords: [],
-        shapes: [
-          {
-            name: 'Triangle',
-            coords: [[50, 0], [0, 100], [100, 100]]
-          },
-          {
-            name: 'Trapezoid',
-            coords: [[20, 0], [80, 0], [100, 100], [0, 100]]
-          },
-          {
-            name: 'Parallelogram',
-            coords: [[25, 0], [100, 0], [75, 100], [0, 100]]
-          },
-          {
-            name: 'Rhombus',
-            coords: [[50, 0], [100, 50], [50, 100], [0, 50]]
-          },
-          {
-            name: 'Pentagon',
-            coords: [[50, 0], [100, 38], [82, 100], [18, 100], [0, 38]]
-          },
-          {
-            name: 'Hexagon',
-            coords: [[50, 0], [100, 25], [100, 75], [50, 100], [0, 75], [0, 25]]
-          },
-          {
-            name: 'Heptagon',
-            coords: [[50, 0], [90, 20], [100, 60], [75, 100], [25, 100], [0, 60], [10, 20]]
-          },
-          {
-            name: 'Octagon',
-            coords: [[30, 0], [70, 0], [100, 30], [100, 70], [70, 100], [30, 100], [0, 70], [0, 30]]
-          },
-          {
-            name: 'Nonagon',
-            coords: [[50, 0], [83, 12], [100, 43], [94, 78], [68, 100], [32, 100], [6, 78], [0, 43], [17, 12]]
-          },
-          {
-            name: 'Decagon',
-            coords: [[50, 0], [80, 10], [100, 35], [100, 70], [80, 90], [50, 100], [20, 90], [0, 70], [0, 35], [20, 10]]
-          },
-          {
-            name: 'Bevel',
-            coords: [[20, 0], [80, 0], [100, 20], [100, 80], [80, 100], [20, 100], [0, 80], [0, 20]]
-          },
-          {
-            name: 'Rabbet',
-            coords: [[0, 15], [15, 15], [15, 0], [85, 0], [85, 15], [100, 15], [100, 85], [85, 85], [85, 100], [15, 100], [15, 85], [0, 85]]
-          },
-          {
-            name: 'Left arrow',
-            coords: [[40, 0], [40, 20], [100, 20], [100, 80], [40, 80], [40, 100], [0, 50]]
-          },
-          {
-            name: 'Right arrow',
-            coords: [[0, 20], [60, 20], [60, 0], [100, 50], [60, 100], [60, 80], [0, 80]]
-          },
-          {
-            name: 'Left Point',
-            coords: [[25, 0], [100, 1], [100, 100], [25, 100], [0, 50]]
-          },
-          {
-            name: 'Right Point',
-            coords: [[0, 0], [75, 0], [100, 50], [75, 100], [0, 100]]
-          },
-          {
-            name: 'Left Chevron',
-            coords: [[100, 0], [75, 50], [100, 100], [25, 100], [0, 50], [25, 0]]
-          },
-          {
-            name: 'Right Chevron',
-            coords: [[75, 0], [100, 50], [75, 100], [0, 100], [25, 50], [0, 0]]
-          },
-          {
-            name: 'Star',
-            coords: [[50, 0], [61, 35], [98, 35], [68, 57], [79, 91], [50, 70], [21, 91], [32, 57], [2, 35], [39, 35]]
-          },
-          {
-            name: 'Cross',
-            coords: [[10, 25], [35, 25], [35, 0], [65, 0], [65, 25], [90, 25], [90, 50], [65, 50], [65, 100], [35, 100], [35, 50], [10, 50]]
-          },
-          {
-            name: 'Message',
-            coords: [[0, 0], [100, 0], [100, 75], [75, 75], [75, 100], [50, 75], [0, 75]]
-          },
-          {
-            name: 'Close',
-            coords: [[20, 0], [0, 20], [30, 50], [0, 80], [20, 100], [50, 70], [80, 100], [100, 80], [70, 50], [100, 20], [80, 0], [50, 30]]
-          },
-          {
-            name: 'Frame',
-            coords: [[0, 0], [0, 100], [25, 100], [25, 25], [75, 25], [75, 75], [25, 75], [25, 100], [100, 100], [100, 0]]
-          },
-          {
-            name: 'Custom',
-            coords: [[10, 75], [10, 25], [35, 0], [100, 10], [90, 30], [50, 30], [40, 40], [40, 60], [50, 70], [90, 70], [100, 90], [35, 100]]
-          }
-        ]
+        radius: 50,
+        startRadius: undefined,
+        radHandle: undefined,
+        position: [50, 50],
+        coords: [[50, 0], [0, 100], [100, 100]],
+        shapes: Shapes
       }
     },
 
@@ -192,11 +107,6 @@
       }
     },
 
-    mounted () {
-      this.coords = this.shapes[this.selectedIndex].coords.slice(0)
-      this.options.selectedBackground = this.options.imgs[0]
-    },
-
     methods: {
       changeShape (index) {
         this.selectedIndex = index
@@ -205,6 +115,10 @@
 
         if (shape.name === 'Custom') {
           this.coords = []
+        }
+
+        if (shape.name === 'Circle') {
+          this.radHandle = document.querySelectorAll('[data-handle="0"]')[0]
         }
 
         this.customizing = !this.coords.length
@@ -219,11 +133,35 @@
         Event.$emit('handleAdded', {index: this.coords.length - 1, coord: [x, y]})
       },
 
+      setStartRadius () {
+        let x = Math.round(this.radHandle.offsetLeft / this.options.width * 100)
+        let y = Math.round(this.radHandle.offsetTop / this.options.height * 100)
+
+        this.$set(this, 'startRadius', this.getRadius(x, this.position[0], y, this.position[1]) / 100)
+      },
+
       updateHandle (payload) {
         let x = Math.round(payload.x / this.options.width * 100)
         let y = Math.round(payload.y / this.options.height * 100)
 
         this.$set(this.coords, payload.i, [x, y])
+
+        if (this.shapes[this.selectedIndex].name === 'Circle') {
+          if (parseInt(payload.i) === 0) {
+            let radius = this.getRadius(x, this.position[0], y, this.position[1])
+            this.$set(this, 'radius', parseFloat(radius))
+          }
+
+          if (parseInt(payload.i) === 1) {
+            this.$set(this, 'position', [x, y])
+          }
+        }
+      },
+
+      getRadius (radX, posX, radY, posY) {
+        let distance = Math.sqrt(Math.pow(radX - posX, 2) + Math.pow(radY - posY, 2))
+
+        return parseFloat(distance)
       },
 
       removeHandle (i) {

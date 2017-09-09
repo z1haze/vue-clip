@@ -1,7 +1,14 @@
-export function clipCSS (shape) {
-  if (shape.coords.length < 3) return 'none'
+export function clipCSS (opts) {
+  const {shape, coords, radius, position} = opts
 
-  return clipType(shape) + '(' + clipPoints(shape.coords).join(', ') + ')'
+  if (coords.length < 3 && shape.name === 'Custom') return 'none'
+
+  switch (shape.name) {
+    case 'Circle':
+      return clipType(shape) + '(' + radius + '% at ' + position[0] + '% ' + position[1] + '%)'
+    default:
+      return clipType(shape) + '(' + clipPoints(coords).join(', ') + ')'
+  }
 }
 
 export function clipPoints (coords) {
@@ -13,5 +20,10 @@ export function clipPoints (coords) {
 }
 
 export function clipType (shape) {
-  return 'polygon'
+  switch (shape.name) {
+    case 'Circle':
+      return 'circle'
+    default:
+      return 'polygon'
+  }
 }

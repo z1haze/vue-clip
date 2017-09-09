@@ -3,9 +3,10 @@
         <div class="css-code code fade-content">
             <code class="block">
                 clip-path: <span class="functions">
-                {{ clipType(shape) }}(<template v-for="(point, i) in clipPoints(coords)">
-                <span :data-point="i" class="point" v-text="point"></span><template v-if="i < coords.length - 1">, </template>
-            </template>)</span>;
+                {{ clipType(shape) }}(
+                <template v-if="shape.name === 'Circle'"><span data-point="0" class="point" v-text="radius + '%'"></span> at <span data-point="1" class="point" v-text="position[0] + '% ' + position[1] + '%'"></span></template>
+                <template v-else v-for="(point, i) in clipPoints(coords)"><span :data-point="i" class="point" v-text="point"></span><template v-if="i < coords.length - 1">, </template></template>
+                )</span>;
             </code>
         </div>
     </section>
@@ -15,7 +16,7 @@
     import { clipType, clipPoints } from '../utilities'
 
     export default {
-      props: ['shape', 'coords'],
+      props: ['shape', 'coords', 'radius', 'position'],
 
       methods: {
         clipType,
@@ -45,7 +46,7 @@
         .code {
             background: #100a09;
             color: #9a8297;
-            padding: 1rem;
+            padding: 1.5rem;
             box-shadow: 0 1px 2px rgba(16, 10, 9, .15);
         }
 
