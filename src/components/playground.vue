@@ -9,7 +9,7 @@
                      :style="background"
                 ></div>
                 <div class="clipboard"
-                     :style="[{'clip-path': clipCSS({ shape, coords: shape.coords, position, radius })}, {'-webkit-clip-path': clipCSS({ shape, coords: shape.coords, position, radius })}, background]"></div>
+                     :style="[{'clip-path': clipCSS({ shape, coords, position, radius })}, {'-webkit-clip-path': clipCSS({ shape, coords: shape.coords, position, radius })}, background]"></div>
                 <handles @updateHandle="updateHandle"
                          @removeHandle="removeHandle"
                          @setStartRadius="setStartRadius"

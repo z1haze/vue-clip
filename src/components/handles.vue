@@ -1,14 +1,14 @@
 <template>
-    <div class="handles">
-        <div v-for="(coord, i) in coords"
-             class="handle"
-             :data-handle="i"
-             @mousedown="mousedown"
-             @mouseup="mouseup"
-        >
-            <div class="delete-point"></div>
-        </div>
+  <div class="handles">
+    <div v-for="(coord, i) in coords"
+         class="handle"
+         :data-handle="i"
+         @mousedown="mousedown"
+         @mouseup="mouseup"
+    >
+      <div class="delete-point"></div>
     </div>
+  </div>
 </template>
 
 <script type="text/babel">
@@ -106,7 +106,9 @@
           grid: [0, 0]
         }).on('pointerDown', function () {
           document.querySelectorAll('[data-point="' + i + '"]')[0].classList.add('changing')
-          self.$emit('setStartRadius')
+          if (self.shape.name === 'Circle') {
+            self.$emit('setStartRadius')
+          }
         }).on('dragMove', function () {
           let x = this.position.x
           let y = this.position.y
@@ -140,92 +142,92 @@
 </script>
 
 <style lang="scss">
-    .handles {
+  .handles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    .delete-point, .handle {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+    }
+
+    .handle {
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 10px;
+      opacity: .8;
+      transition: opacity .25s;
+
+      &.is-dragging,
+      &.is-pointer-down { // better than using :hover/:active for touch
+        z-index: 100;
+        box-shadow: inset 0 0 0 3px;
+        cursor: none;
+        transition: box-shadow 0s;
+      }
+
+      &.draggable {
+        cursor: grab
+      }
+
+      &.show-delete {
+        .delete-point {
+          transform: scale3d(0.9, .9, .9);
+          transition: transform .25s cubic-bezier(0.15, 1, .3, 1.1), opacity .25s;
+          opacity: 1;
+        }
+      }
+
+      &:after {
+        display: block;
+        content: "";
         position: absolute;
+        top: -8px;
+        left: -8px;
+        right: -8px;
+        bottom: -8px;
+      }
+
+      .delete-point {
+        position: absolute;
+        left: 22px;
         top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        width: 25px;
+        padding-left: 5px;
+        border-radius: 3px;
+        background: #d3d0c9;
+        transform: scale3d(0, 0, 0);
+        transform-origin: left center;
+        cursor: pointer;
+        opacity: .75;
+        clip-path: polygon(25% 0, 100% 1%, 100% 100%, 25% 100%, 0 50%);
+        transition: transform .25s, opacity .25s;
 
-        .delete-point, .handle {
-            position: absolute;
-            width: 20px;
-            height: 20px;
+        &:after {
+          display: block;
+          content: "";
+          position: absolute;
+          top: 4px;
+          left: 9px;
+          right: 4px;
+          bottom: 4px;
+          background: #100a09;
+          clip-path: polygon(20% 10%, 10% 20%, 40% 50%, 10% 80%, 20% 90%, 50% 60%, 80% 90%, 90% 80%, 60% 50%, 90% 20%, 80% 10%, 50% 40%);
         }
-
-        .handle {
-            border-radius: 50%;
-            box-shadow: inset 0 0 0 10px;
-            opacity: .8;
-            transition: opacity .25s;
-
-            &.is-dragging,
-            &.is-pointer-down { // better than using :hover/:active for touch
-                z-index: 100;
-                box-shadow: inset 0 0 0 3px;
-                cursor: none;
-                transition: box-shadow 0s;
-            }
-
-            &.draggable {
-                cursor: grab
-            }
-
-            &.show-delete {
-                .delete-point {
-                    transform: scale3d(0.9, .9, .9);
-                    transition: transform .25s cubic-bezier(0.15, 1, .3, 1.1), opacity .25s;
-                    opacity: 1;
-                }
-            }
-
-            &:after {
-                display: block;
-                content: "";
-                position: absolute;
-                top: -8px;
-                left: -8px;
-                right: -8px;
-                bottom: -8px;
-            }
-
-            .delete-point {
-                position: absolute;
-                left: 22px;
-                top: 0;
-                width: 25px;
-                padding-left: 5px;
-                border-radius: 3px;
-                background: #d3d0c9;
-                transform: scale3d(0, 0, 0);
-                transform-origin: left center;
-                cursor: pointer;
-                opacity: .75;
-                clip-path: polygon(25% 0, 100% 1%, 100% 100%, 25% 100%, 0 50%);
-                transition: transform .25s, opacity .25s;
-
-                &:after {
-                    display: block;
-                    content: "";
-                    position: absolute;
-                    top: 4px;
-                    left: 9px;
-                    right: 4px;
-                    bottom: 4px;
-                    background: #100a09;
-                    clip-path: polygon(20% 10%, 10% 20%, 40% 50%, 10% 80%, 20% 90%, 50% 60%, 80% 90%, 90% 80%, 60% 50%, 90% 20%, 80% 10%, 50% 40%);
-                }
-            }
-        }
+      }
     }
+  }
 
-    .playground:hover {
-        .handle {
-            opacity: 1;
-        }
+  .playground:hover {
+    .handle {
+      opacity: 1;
     }
+  }
 
-    .playground.customizing .handle {
-        pointer-events: none;
-    }
+  .playground.customizing .handle {
+    pointer-events: none;
+  }
 </style>
